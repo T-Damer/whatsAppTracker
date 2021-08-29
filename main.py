@@ -1,30 +1,51 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
+import telepot
+
+import time
 from dotenv import load_dotenv
 import os
 
+from macheronte.whatsapp.enums.browsers import Browsers
+from macheronte.whatsapp.client import WhatsappClient
+from macheronte.tracker.user import User
+
 load_dotenv()
 
-options = Options()
-options.add_argument(r'user-data-dir=' + os.environ.get('chromeUserPath'))
+telegramUsers = ['395659658']
+user = None
 
-browser = webdriver.Chrome(options=options)
-browser.get('https://www.google.com')
 
-wait = WebDriverWait(browser, 5)
+def on_chat_message(msg):
+    global user
 
-search_bar = wait.until(EC.presence_of_element_located((By.XPATH, "//body/div[1]/div[3]/form[1]/div[1]/div[1]/div[1]/div[1]/div[2]/input[1]")))
-search_bar.send_keys('whatsapp web')
+    content_type, chat_type, chat_id = telepot.glance(msg)
 
-enter_action = ActionChains(browser)
-enter_action.send_keys(Keys.ENTER)
+    if (str(chat_id) in telegramUsers):
+        if content_type == 'text' and (user is None or msg['text'] != user.user_name):
+            user = User(msg['text'], client)
+            bot.sendMessage(chat_id, "Trying to track " + user.user_name)
 
-enter_action.perform()
 
-whatsapp_link = wait.until(EC.presence_of_element_located((By.XPATH, "//body/div[@id='main']/div[@id='cnt']/div[@id='rcnt']/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]/h3[1]")))
-whatsapp_link.click()
+bot = telepot.Bot(os.environ.get('tgToken'))
+bot.message_loop(on_chat_message)
+
+client = WhatsappClient(Browsers.CHROME)
+client.connect()
+
+while True:
+    try:
+        if user is not None and client.is_logged():
+            bot.sendMessage(telegramUsers[0], 'User is not valid')
+            user = None
+        else:
+            user.sample()
+
+            if user.is_new() and user.header != None:
+                bot.sendPhoto(telegramUsers[0], photo=user.header)
+
+            if user.has_new_status():
+                bot.sendMessage(telegramUsers[0], str(user.user_name + ": " + user.status.value))
+
+    except Exception as e:
+        print(e)
+
+    time.sleep(2)

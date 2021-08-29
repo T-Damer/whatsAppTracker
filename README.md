@@ -1,9 +1,9 @@
 
+# WhatsApp Tracker build with selenium
+
+![logo](logo.png)
 
 # Demo
-
-
-# WhatsApp Tracker build with selenium
 
 
 ---
@@ -26,13 +26,13 @@ cd whatsAppTracker
 
 ### Second
 
-Add the `.env` files to your local folder, consider looking at `.env.example`
+Add the `.env` file to `whatsAppTracker` folder, consider looking at `.env.example`
 
 List of variables:
 
-|chromeUserPath                                              |  Something else                                                                                                                                               | SHEET_ID                                                                                    |
+|chromeUserPath                                              | tgToken                                                                                     |                                                 | SHEET_ID                                                                                    |
 | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| C:\Users\{YOURUSERNAME}\AppData\Local\Google\Chrome\User   | Waiting |
+| C:\Users\{YOURUSERNAME}\AppData\Local\Google\Chrome\User   | Your telegram bot token (you can get one from BotFather)                                    |
 
 ### Third
 
