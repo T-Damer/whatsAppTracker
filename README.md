@@ -30,7 +30,7 @@ Add the `.env` file to `whatsAppTracker` folder, consider looking at `.env.examp
 
 List of variables:
 
-|chromeUserPath                                              | tgToken                                                                                     |                                                 | SHEET_ID                                                                                    |
+|chromeUserPath                                              | tgToken                                                                                     |
 | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | C:\Users\{YOURUSERNAME}\AppData\Local\Google\Chrome\User   | Your telegram bot token (you can get one from BotFather)                                    |
 
