@@ -30,12 +30,19 @@ Add the `.env` files to your local folder, consider looking at `.env.example`
 
 List of variables:
 
-| GOOGLE_APPLICATION_CREDENTIALS                                                                                                                                                                                               | SHEET_ID                                                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| This is your secrets, which you get from [google.apis](https://console.cloud.google.com/apis/), connect google.sheets -> credentials -> your account -> keys -> create new api key like JSON -> paste data to `secrets.json` | Share your sheets so anyone can edit and copy-paste only id in url after `/d/{yourSheetId}` |
+|chromeUserPath                                              |  Something else                                                                                                                                               | SHEET_ID                                                                                    |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| C:\Users\{YOURUSERNAME}\AppData\Local\Google\Chrome\User   | Waiting |
 
 ### Third
 
+Install selenium driver (check Selenium folder, or download WEBDRIVER for Python [from here](https://www.selenium.dev/downloads/))
+
+Then add location of `Selenium` folder [to your PATH variables](https://www.google.com/search?q=add+to+path&oq=add+to+path)
+
+#### Fourth
+
+Finally, run the `main.py`
 
 ---
 
