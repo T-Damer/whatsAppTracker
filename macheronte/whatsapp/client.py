@@ -17,10 +17,14 @@ import os.path
 import time
 import ast
 
+
 class WhatsappClient:
 
-    def __init__(self, browser: Browsers, profile_name: str):
+    def __init__(self, browser: Browsers, profile_path: str = None):
         options = Options()
+
+        if profile_path is not None:
+             options.add_argument(r'user-data-dir=' + profile_path)
 
         if browser == Browsers.CHROME:
             self.__webdriver = webdriver.Chrome(chrome_options=options)
