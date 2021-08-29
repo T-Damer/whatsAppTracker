@@ -40,7 +40,7 @@ Install selenium driver (check Selenium folder, or download WEBDRIVER for Python
 
 Then add location of `Selenium` folder [to your PATH variables](https://www.google.com/search?q=add+to+path&oq=add+to+path)
 
-#### Fourth
+### Fourth
 
 Finally, run the `main.py`
 
